@@ -2,27 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mensaje Privado</title>
+
+  <!-- Fuente elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #667eea, #372e98);
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(to bottom right, #667eea, #764ba2);
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
+      text-align: center;
     }
 
-    #contenedor {
+    .contenedor {
       text-align: center;
       background: rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 90%;
     }
 
     input[type="password"] {
@@ -30,6 +35,9 @@
       border-radius: 10px;
       border: none;
       margin-top: 15px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      text-align: center;
     }
 
     button {
@@ -40,34 +48,90 @@
       background-color: #ffffff33;
       color: white;
       cursor: pointer;
+      font-size: 22px;
     }
 
-    #mensaje {
+    #mantenimiento {
       display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      height: 100vh;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .mensaje {
+      background: rgba(255,255,255,0.15);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
       font-size: 24px;
-      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    a {
+      font-size: 26px;
+      color: #fff;
+      text-decoration: none;
+      border: 2px solid #fff;
+      padding: 10px 20px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    a:hover {
+      background: #fff;
+      color: #764ba2;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <div id="contenedor">
+  <!-- Vista de acceso -->
+  <div class="contenedor" id="acceso">
     <h2>Ingresa la contraseña</h2>
     <input type="password" id="clave" placeholder="Contraseña">
     <br>
     <button onclick="verificar()">Acceder</button>
+  </div>
 
-    <div id="mensaje">
-      ✨ No no el coco no el coco no ✨<br>
-      <em>"No te me subas al coco no"</em>
+  <!-- Vista de mantenimiento -->
+  <div id="mantenimiento">
+    <div class="mensaje">
+      <h1>Página en mantenimiento</h1>
+      <p>
+        En próximas fechas podrás ver el contenido completo.<br>
+        Mientras tanto, puedes escuchar esta bella canción:
+      </p>
+      
+      <!-- Enlace al video -->
+      <a href="https://www.youtube.com/watch?v=4whD6uAryMs" target="_blank">
+        💖
+      </a>
     </div>
   </div>
 
   <script>
     function verificar() {
-      const claveCorrecta = "1234"; // CAMBIA ESTO
+      const claveCorrecta = "Drums Please Fab"; // Cambia esta clave si lo deseas
       const claveIngresada = document.getElementById("clave").value;
       if (claveIngresada === claveCorrecta) {
-        document.getElementById("mensaje").style.display = "block";
+        document.getElementById("acceso").style.display = "none";
+        document.getElementById("mantenimiento").style.display = "flex";
       } else {
         alert("Contraseña incorrecta");
       }
@@ -75,3 +139,4 @@
   </script>
 </body>
 </html>
+
