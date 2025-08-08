@@ -17,7 +17,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
       text-align: center;
     }
 
@@ -28,6 +27,7 @@
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.3);
       max-width: 90%;
+      color: white;
     }
 
     input[type="password"] {
@@ -51,52 +51,58 @@
       font-size: 22px;
     }
 
-    #mantenimiento {
+    /* Página con el mensaje */
+    #contenido {
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #fff;
       background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
       height: 100vh;
       width: 100%;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .mensaje {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.85);
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 0 25px rgba(0,0,0,0.3);
-      max-width: 600px;
+      max-width: 800px;
     }
 
     h1 {
       font-size: 36px;
       margin-bottom: 20px;
+      color: #2c2c2c;
     }
 
     p {
       font-size: 24px;
-      margin-bottom: 30px;
+      line-height: 1.6;
+      color: #2c2c2c;
+      white-space: pre-line;
+      text-align: left;
     }
 
-    a {
-      font-size: 26px;
-      color: #fff;
-      text-decoration: none;
-      border: 2px solid #fff;
-      padding: 10px 20px;
-      border-radius: 15px;
-      transition: all 0.3s ease;
-      display: inline-block;
+    /* Botón de la foto */
+    #btnFoto {
+      display: none;
+      margin-top: 20px;
+      background-color: #ff4d6d;
+      color: white;
+      font-size: 20px;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
     }
 
-    a:hover {
-      background: #fff;
-      color: #764ba2;
-      transform: scale(1.05);
+    #btnFoto:hover {
+      background-color: #e63950;
     }
   </style>
 </head>
@@ -104,39 +110,71 @@
   <!-- Vista de acceso -->
   <div class="contenedor" id="acceso">
     <h2>Ingresa la contraseña</h2>
-    <input type="password" id="clave" placeholder="Contraseña">
+    <input type="password" id="clave" placeholder="Contraseña" onkeypress="if(event.key==='Enter'){verificar()}">
     <br>
     <button onclick="verificar()">Acceder</button>
   </div>
 
-  <!-- Vista de mantenimiento -->
-  <div id="mantenimiento">
+  <!-- Página con el mensaje -->
+  <div id="contenido">
     <div class="mensaje">
-      <h1>Página en mantenimiento</h1>
-      <p>
-        En próximas fechas podrás ver el contenido completo.<br>
-        Mientras tanto, puedes escuchar esta bella canción:
-      </p>
-      
-      <!-- Enlace al video -->
-      <a href="https://www.youtube.com/watch?v=4whD6uAryMs" target="_blank">
-        💖
-      </a>
+      <h1>Para ti, Liz ❤️</h1>
+      <p id="texto"></p>
+      <button id="btnFoto" onclick="window.open('https://drive.google.com/file/d/1-hnFtgWn58zYEcPq_PS7M4DfKa389VBe/view?usp=sharing', '_blank')">
+        📷 La foto favorita de mi día favorito
+      </button>
     </div>
   </div>
 
   <script>
+    const mensaje = `Hoy, Lizeth, puedo decir con certeza que este día es uno de los más especiales de mi vida.  
+¿Sabes por qué? Porque hoy celebra un año más de existencia una de las personas más maravillosas que este mundo ha tenido la fortuna de conocer… y yo, la fortuna de tener cerca.  
+
+¡Feliz cumpleaños Liz!  
+Me llena de alegría verte sumar un capítulo más a tu historia, una historia que admiro por tu fortaleza, tu bondad y esa luz que llevas dentro.  
+Te mereces lo mejor que la vida pueda ofrecer, y agradezco profundamente cada instante, cada risa, cada emoción y cada paz que me has regalado sin que sea tu obligación… pero sí tu don.  
+Un don que convierte mis días grises en paisajes llenos de color.  
+
+Hoy deseo, desde lo más profundo de mi corazón, que vivas el mejor cumpleaños de todos:  
+Que te sientas dichosa, tranquila, emocionada… y que recibas toda la atención y cariño que mereces.  
+Come, ríe, baila, vive como si este fuera el último día, y nunca dejes de mostrarle al mundo esa fuerza y esas ganas infinitas de alcanzar tus sueños.  
+Estoy seguro, y lo afirmo sin dudar, que todo lo que te propongas llegará a tu vida con prosperidad, porque así lo dicta la grandeza de tu ser.  
+
+Liz, me hace inmensamente feliz verte cumplir años y saber que puedo acompañarte en este camino.  
+Hoy, más que nunca, quiero regalarte momentos en tu cumpleaños que ojalá se graben en tu memoria como los más bellos de tu vida.  
+
+Bienvenida a la parte 2 de tu cumpleaños ❤️  
+Te amo con el todo mi corazón,  
+JuanDa.`;
+
     function verificar() {
-      const claveCorrecta = "Drums Please Fab"; // Cambia esta clave si lo deseas
+      const claveCorrecta = "Drums Please Fab";
       const claveIngresada = document.getElementById("clave").value;
       if (claveIngresada === claveCorrecta) {
         document.getElementById("acceso").style.display = "none";
-        document.getElementById("mantenimiento").style.display = "flex";
+        document.getElementById("contenido").style.display = "flex";
+        escribirTexto();
       } else {
         alert("Contraseña incorrecta");
       }
     }
+
+    function escribirTexto() {
+      let i = 0;
+      const velocidad = 35;
+      const elemento = document.getElementById("texto");
+      const btnFoto = document.getElementById("btnFoto");
+      function escribir() {
+        if (i < mensaje.length) {
+          elemento.textContent += mensaje.charAt(i);
+          i++;
+          setTimeout(escribir, velocidad);
+        } else {
+          btnFoto.style.display = "inline-block";
+        }
+      }
+      escribir();
+    }
   </script>
 </body>
 </html>
-
